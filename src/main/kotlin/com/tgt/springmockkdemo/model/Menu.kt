@@ -24,7 +24,7 @@ class MenuDao(id: EntityID<UUID>) : UUIDEntity(id) {
 
     val name by MenuTable.name
 
-    fun toModel() = MenuItem(this.name)
+    fun toModel() = MenuItem(name)
 }
 
 internal object MenuTable : UUIDTable("menu") {

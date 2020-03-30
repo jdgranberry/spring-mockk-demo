@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringMockkDemoApplication
+class MyResaurant
 
 fun main(args: Array<String>) {
-    runApplication<SpringMockkDemoApplication>(*args)
+    runApplication<MyResaurant>(*args)
 }

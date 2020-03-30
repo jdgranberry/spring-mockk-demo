@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient
 
 @Configuration
 class AppConfig {
-    @Value("\${external-apis.recipes}")
+    @Value("\${external-apis.recipe}")
     val recipeApiUrl: String? = null
 
     @Bean

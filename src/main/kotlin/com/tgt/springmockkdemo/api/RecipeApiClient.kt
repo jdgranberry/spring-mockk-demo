@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 
 @Component
-class RecipeApi(@Qualifier(value = "recipeApi") val webClient: WebClient) {
+class RecipeApiClient(@Qualifier(value = "recipeApi") val webClient: WebClient) {
     fun getRecipe(name: String): Recipe {
         return webClient.get()
                 .uri("/recipe")

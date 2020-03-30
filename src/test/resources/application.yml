@@ -1,0 +1,7 @@
+external-apis:
+  recipe: http://invalid.recipe.url
+
+spring:
+  kafka:
+    producer:
+      topic: complete-orders

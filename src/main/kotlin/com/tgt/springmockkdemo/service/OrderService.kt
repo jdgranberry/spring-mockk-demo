@@ -1,7 +1,5 @@
 package com.tgt.springmockkdemo.service
 
-import com.tgt.springmockkdemo.model.Meal
-import com.tgt.springmockkdemo.model.MealDao
 import com.tgt.springmockkdemo.model.MenuDao
 import org.springframework.stereotype.Service
 

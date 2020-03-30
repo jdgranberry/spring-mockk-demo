@@ -5,14 +5,20 @@ import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
 import org.jetbrains.exposed.dao.UUIDTable
 import org.jetbrains.exposed.sql.transactions.transaction
+import reactor.core.publisher.toMono
 import java.util.*
 
-data class Meal(val name: String, val tableNumber: Int)
+data class Meal(val id: UUID?, val name: String, val tableNumber: Int?)
 
 class MealDao(id: EntityID<UUID>) : UUIDEntity(id) {
     companion object : UUIDEntityClass<MealDao>(MealTable) {
-        fun cook(menuItem: MenuItem, tableNumber: Int): Meal = transaction {
+        fun cook(menuItem: MenuItem): Meal = transaction {
             MealDao.new { name = menuItem.name }.toModel()
+        }
+
+        fun runFood(meal: Meal, tableNumber: Int): Meal = transaction {
+            MealDao[meal.id!!].tableNumber = tableNumber
+            MealDao[meal.id].toModel()
         }
 
         private fun MealDao.mealToDao(menuItem: MenuItem, tableNumber: Int) {
@@ -24,10 +30,10 @@ class MealDao(id: EntityID<UUID>) : UUIDEntity(id) {
     var name by MealTable.name
     var tableNumber by MealTable.tableNumber
 
-    fun toModel() = Meal(this.name, this.tableNumber)
+    fun toModel() = Meal(this.id.value, this.name, this.tableNumber)
 }
 
 internal object MealTable : UUIDTable(name = "meal") {
     val name = text("name").references(MenuTable.name)
-    val tableNumber = integer("table_number")
+    val tableNumber = integer("table_number").nullable()
 }

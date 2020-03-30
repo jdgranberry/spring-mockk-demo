@@ -28,13 +28,9 @@ class CookService(val recipeApiClient: RecipeApiClient, val foodRunner: FoodRunn
             return false
         }
 
-        val meal: Meal? = MealDao.cook(menuItem!!, tableNumber)
+        val meal: Meal = MealDao.cook(menuItem!!)
 
-        meal.let {
-            foodRunner.runFood(it!!)
-        } ?: run {
-            return false
-        }
+        foodRunner.runFood(meal, tableNumber)
 
         return true
     }

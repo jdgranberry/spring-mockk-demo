@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.util.*
 
-data class MenuItem(val name: String)
+data class MenuItem(val id: UUID?, val name: String)
 
 class MenuDao(id: EntityID<UUID>) : UUIDEntity(id) {
     companion object : UUIDEntityClass<MenuDao>(MenuTable) {
@@ -24,7 +24,7 @@ class MenuDao(id: EntityID<UUID>) : UUIDEntity(id) {
 
     val name by MenuTable.name
 
-    fun toModel() = MenuItem(name)
+    fun toModel() = MenuItem(this.id.value, name)
 }
 
 internal object MenuTable : UUIDTable("menu") {

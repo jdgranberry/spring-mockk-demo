@@ -18,7 +18,7 @@ class FoodRunner(val objectMapper: ObjectMapper, val publisher: KafkaTemplate<St
     fun runFood(meal: Meal, tableNumber: Int) {
         try {
             publisher.send(topic!!, objectMapper.writeValueAsBytes(meal))
-            logger.info("Ran ${meal.name} to table ${meal.tableNumber}.")
+            logger.info("Ran ${meal.name} to table ${tableNumber}.")
             MealDao.runFood(meal, tableNumber)
         } catch (e: Exception) {
             logger.error("Unable to run $meal to ${meal.tableNumber}", e)

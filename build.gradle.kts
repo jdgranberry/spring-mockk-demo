@@ -32,6 +32,10 @@ dependencies {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
     testImplementation("io.mockk:mockk:1.9.3.kotlin12")
+    testImplementation("com.ninja-squad:springmockk:2.0.0")
+    testImplementation("io.zonky.test:embedded-postgres:1.2.6")
+    testImplementation("io.zonky.test.postgres:embedded-postgres-binaries-bom:11.6.0")
+
 }
 
 tasks.withType<Test> {

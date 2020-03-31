@@ -14,7 +14,10 @@ class MenuDao(id: EntityID<UUID>) : UUIDEntity(id) {
     companion object : UUIDEntityClass<MenuDao>(MenuTable) {
         fun getMenu(): List<String> = transaction {
             MenuDao.wrapRows(MenuTable.slice(MenuTable.columns).selectAll().withDistinct()).map { it.name }
+        }
 
+        fun insertMenuItem(name: String): MenuItem = transaction {
+            MenuDao.new { this.name = name }.toModel()
         }
 
         fun getMenuItem(name: String): MenuItem? = transaction {
@@ -22,7 +25,7 @@ class MenuDao(id: EntityID<UUID>) : UUIDEntity(id) {
         }
     }
 
-    val name by MenuTable.name
+    var name by MenuTable.name
 
     fun toModel() = MenuItem(this.id.value, name)
 }

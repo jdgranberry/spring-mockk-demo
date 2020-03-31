@@ -21,6 +21,10 @@ class MealDao(id: EntityID<UUID>) : UUIDEntity(id) {
             MealDao[meal.id].toModel()
         }
 
+        fun getMeal(id: UUID): Meal = transaction {
+            MealDao[id].toModel()
+        }
+
         private fun MealDao.mealToDao(menuItem: MenuItem, tableNumber: Int) {
             this.name = menuItem.name
             this.tableNumber = tableNumber

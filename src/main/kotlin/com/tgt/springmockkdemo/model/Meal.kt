@@ -5,7 +5,6 @@ import org.jetbrains.exposed.dao.UUIDEntity
 import org.jetbrains.exposed.dao.UUIDEntityClass
 import org.jetbrains.exposed.dao.UUIDTable
 import org.jetbrains.exposed.sql.transactions.transaction
-import reactor.core.publisher.toMono
 import java.util.*
 
 data class Meal(val id: UUID?, val name: String, val tableNumber: Int?)

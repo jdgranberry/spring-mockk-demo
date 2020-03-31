@@ -4,4 +4,4 @@ external-apis:
 spring:
   kafka:
     producer:
-      topic: complete-orders
+      topic: complete-orders-test

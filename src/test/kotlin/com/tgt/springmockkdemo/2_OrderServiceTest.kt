@@ -32,10 +32,9 @@ class OrderServiceTest {
     fun `calling getOrderForTwo calls cookService_cookMeal twice`() {
         val order = "JUICY_LUCY_BURGER"
 
-        val mockMenuDao = mockkObject(MenuDao)
+        mockkObject(MenuDao)
 
         every { MenuDao.getMenu() } returns listOf(order)
-
         every { cookService.cookMeal(order, any()) } returnsMany listOf(true, true)
 
         orderService.placeOrderForTwo(order, 42)
@@ -44,6 +43,4 @@ class OrderServiceTest {
 
         unmockkObject(MenuDao)
     }
-
-
 }

@@ -5,15 +5,22 @@ import com.tgt.springmockkdemo.model.MenuTable
 import io.zonky.test.db.postgres.embedded.EmbeddedPostgres
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 open class BaseFunctionalTest {
     init {
         Database.connect(EmbeddedPostgres.start().postgresDatabase)
         transaction {
-                SchemaUtils.create(MenuTable, MealTable)
+            SchemaUtils.create(MenuTable, MealTable)
         }
     }
+
+    fun resetDaos() =
+            transaction {
+                MenuTable.deleteAll()
+                MealTable.deleteAll()
+            }
 
 
 }

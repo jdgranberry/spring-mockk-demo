@@ -16,8 +16,9 @@ class FoodRunner(val objectMapper: ObjectMapper, val publisher: KafkaTemplate<St
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     fun runFood(meal: Meal, tableNumber: Int) {
+        val ranFood = meal.copy(tableNumber = tableNumber)
         try {
-            publisher.send(topic!!, objectMapper.writeValueAsBytes(meal))
+            publisher.send(topic!!, objectMapper.writeValueAsBytes(ranFood))
             logger.info("Ran ${meal.name} to table ${tableNumber}.")
             MealDao.runFood(meal, tableNumber)
         } catch (e: Exception) {

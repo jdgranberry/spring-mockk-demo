@@ -21,6 +21,4 @@ open class BaseFunctionalTest {
                 MenuTable.deleteAll()
                 MealTable.deleteAll()
             }
-
-
 }
